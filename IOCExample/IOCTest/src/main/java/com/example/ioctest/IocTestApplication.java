@@ -15,16 +15,19 @@ public class IocTestApplication {
         SpringApplication.run(IocTestApplication.class, args);
         ApplicationContext context = ApplicationContextProvider.getContext();
 
-        Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
-        UrlEncoder urlEncoder = context.getBean(UrlEncoder.class);
-        Encoder encoder = new Encoder(base64Encoder);
+//        Base64Encoder base64Encoder = context.getBean(Base64Encoder.class);
+//        UrlEncoder urlEncoder = context.getBean(UrlEncoder.class);
+
+        //spring형태에서 관리 되는 객체 -> bean
+        Encoder encoder = context.getBean(Encoder.class);
         String url = "www.naver.com";
 
         String result = encoder.encode(url);
         System.out.println(result);
+        encoder.setEncoder(context.getBean(UrlEncoder.class));
 
-        encoder.setEncoder(urlEncoder);
-        result = encoder.encode(url);
-        System.out.println(result);
+//        encoder.setEncoder(urlEncoder);
+//        result = encoder.encode(url);
+//        System.out.println(result);
     }
 }

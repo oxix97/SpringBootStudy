@@ -1,9 +1,13 @@
 package com.example.ioctest.ioc.encode;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+@Component
 public class Encoder {
     private EncodingService service;
 
-    public Encoder(EncodingService service) {
+    public Encoder(@Qualifier("base64") EncodingService service) {
         this.service = service;
     }
 

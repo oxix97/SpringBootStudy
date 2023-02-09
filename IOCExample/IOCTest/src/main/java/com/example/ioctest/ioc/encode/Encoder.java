@@ -1,8 +1,11 @@
 package com.example.ioctest.ioc.encode;
 
-public class Base64Encoder implements EncodingService {
-
+public class Encoder {
     private EncodingService service;
+
+    public Encoder(EncodingService service) {
+        this.service = service;
+    }
 
     public String encode(String msg) {
         return service.encode(msg);

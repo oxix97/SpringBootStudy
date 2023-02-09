@@ -7,6 +7,10 @@ public class Encoder {
         this.service = service;
     }
 
+    public void setEncoder(EncodingService service) {
+        this.service = service;
+    }
+
     public String encode(String msg) {
         return service.encode(msg);
     }

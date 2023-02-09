@@ -1,6 +1,5 @@
 package com.example.ioctest.ioc;
 
-import com.example.ioctest.ioc.encode.Base64Encoder;
 import com.example.ioctest.ioc.encode.Encoder;
 import com.example.ioctest.ioc.encode.UrlEncoder;
 

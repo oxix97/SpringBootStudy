@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-@Component("url")
+@Component
 public class UrlEncoder implements EncodingService {
 
     @Override

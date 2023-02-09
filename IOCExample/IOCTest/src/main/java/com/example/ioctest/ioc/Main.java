@@ -1,22 +1,17 @@
 package com.example.ioctest.ioc;
 
-import com.example.ioctest.ioc.encode.Encoder;
+import com.example.ioctest.ioc.encode.Base64Encoder;
+import com.example.ioctest.ioc.encode.EncodingService;
 import com.example.ioctest.ioc.encode.UrlEncoder;
 
-import java.io.UnsupportedEncodingException;
-
 public class Main {
-    public static void main(String[] args) throws UnsupportedEncodingException {
+    public static void main(String[] args) {
         String url = "www.naver.com";
 
-        // base 64 encoding
-        Encoder encoder = new Encoder();
-        String result = encoder.encode(url);
-        System.out.println(result);
+        EncodingService base64Encoder = new Base64Encoder();
+        String base64Result = base64Encoder.encode(url);
 
-        //url encoding
-        UrlEncoder urlEncoder = new UrlEncoder();
-        String urlResult = UrlEncoder.encode(url);
-        System.out.println(urlResult);
+        EncodingService urlEncoder = new UrlEncoder();
+        String urlResult = urlEncoder.encode(url);
     }
 }

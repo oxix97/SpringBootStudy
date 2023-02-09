@@ -1,8 +1,21 @@
 package com.example.demo.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
     private String name;
     private int age;
+    private String phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public User() {
     }
@@ -15,9 +28,11 @@ public class User {
 //        return new User("user", 1);
 //    }
 
-    public User(String name, int age) {
+
+    public User(String name, int age, String phoneNumber) {
         this.name = name;
         this.age = age;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getName() {
@@ -33,6 +48,7 @@ public class User {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

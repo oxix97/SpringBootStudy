@@ -17,7 +17,6 @@ public class DecodeAop {
     private void cut() {
 
     }
-
     //annotation에만 로깅
     @Pointcut("@annotation(com.example.aoptest.annotation.Decode)")
     private void enableDecode() {

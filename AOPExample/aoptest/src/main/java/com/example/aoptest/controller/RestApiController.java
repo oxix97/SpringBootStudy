@@ -1,5 +1,6 @@
 package com.example.aoptest.controller;
 
+import com.example.aoptest.annotation.Decode;
 import com.example.aoptest.annotation.Timer;
 import com.example.aoptest.dto.User;
 import org.springframework.web.bind.annotation.*;
@@ -22,5 +23,12 @@ public class RestApiController {
     @DeleteMapping("/delete")
     public void delete() throws InterruptedException {
         Thread.sleep(1000L * 2);// db logic 1 sec 라고 가정
+    }
+
+    @Decode
+    @PutMapping("/put")
+    public User put(@RequestBody User user) {
+        System.out.println("put user");
+        return user;
     }
 }

@@ -2,17 +2,29 @@ package com.example.springbootvalidation.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
+    @NotBlank
     private String name;
+    @Max(value = 90)
     private int age;
     @Email
     private String email;
     @Pattern(regexp = "\\d{3}-\\d{4}-\\d{4}", message = "핸드폰 번호가 아닙니다.")
     private String phoneNumber;
+
+    @Size(min = 6, max = 6)
+    private String reqYearMonth; // yyyyMM
+
+    public String getReqYearMonth() {
+        return reqYearMonth;
+    }
+
+    public void setReqYearMonth(String reqYearMonth) {
+        this.reqYearMonth = reqYearMonth;
+    }
 
     public String getName() {
         return name;
@@ -53,6 +65,7 @@ public class User {
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", reqYearMonth='" + reqYearMonth + '\'' +
                 '}';
     }
 }

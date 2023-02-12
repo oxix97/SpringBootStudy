@@ -1,5 +1,6 @@
 package com.example.springbootvalidation.controller;
 
+import com.example.springbootvalidation.dto.Owner;
 import com.example.springbootvalidation.dto.User;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,31 @@ public class ApiController {
                 String msg = error.getDefaultMessage();
 
                 sb.append("field : ").append(field.getField())
-                        .append(", message : ").append(msg);;
+                        .append(", message : ").append(msg);
+                ;
             });
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
         }
         return user;
+    }
+
+    @PostMapping("/owner")
+    public Object owner(@Valid @RequestBody Owner owner, BindingResult result) {
+        if (result.hasErrors()) {
+            StringBuilder sb = new StringBuilder();
+            result.getAllErrors().forEach(error -> {
+                FieldError field = (FieldError) error;
+                String msg = error.getDefaultMessage();
+
+                sb.append("field : ").append(field.getField())
+                        .append(", message : ").append(msg);
+                ;
+            });
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
+        }
+        System.out.println(owner.toString());
+        return owner;
     }
 }

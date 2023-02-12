@@ -1,5 +1,6 @@
 package com.example.springbootvalidation.dto;
 
+import com.example.springbootvalidation.annotation.YearMonth;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.*;
@@ -21,6 +22,7 @@ public class User {
     @Size(min = 6, max = 6)
     private String reqYearMonth; // yyyyMM
 
+    @YearMonth
     public String getReqYearMonth() {
         return reqYearMonth;
     }
@@ -59,17 +61,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    @AssertTrue(message = "yyyyMM형식이 아닙니다.")
-    public boolean isCheckReqYearMonth() {
-        String text = this.reqYearMonth + "01";
-        try {
-            LocalDate localDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyyMMdd"));
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
     }
 
     @Override

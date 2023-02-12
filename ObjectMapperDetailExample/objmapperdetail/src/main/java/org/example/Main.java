@@ -36,11 +36,12 @@ public class Main {
 
         String json = objectMapper.writeValueAsString(user);
         System.out.println(json);
+        System.out.println("-------------");
 
         JsonNode jsonNode = objectMapper.readTree(json);
         String _name = jsonNode.get("name").asText();
         int _age = jsonNode.get("age").asInt();
-        System.out.println("-------------");
+
         System.out.println("name : " + _name);
         System.out.println("age : " + _age);
 
@@ -51,6 +52,7 @@ public class Main {
         });
         System.out.println(_cars);
 
+        System.out.println("-------------");
         ObjectNode objectNode = (ObjectNode) jsonNode;
         objectNode.put("name", "KIM");
 

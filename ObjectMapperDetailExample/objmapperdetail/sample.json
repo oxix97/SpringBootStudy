@@ -1,0 +1,16 @@
+{
+  "name": "Chan",
+  "age": 27,
+  "cars": [
+    {
+      "name": "K3",
+      "number": "11나 1111",
+      "type": "sedan"
+    },
+    {
+      "name": "Q5",
+      "number": "22나 2222",
+      "type": "SUV"
+    }
+  ]
+}

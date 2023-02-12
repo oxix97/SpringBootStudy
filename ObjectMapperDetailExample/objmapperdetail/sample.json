@@ -4,13 +4,13 @@
   "cars": [
     {
       "name": "K3",
-      "number": "11나 1111",
-      "type": "sedan"
+      "car_number": "11나 1111",
+      "TYPE": "sedan"
     },
     {
       "name": "Q5",
-      "number": "22나 2222",
-      "type": "SUV"
+      "car_number": "22나 2222",
+      "TYPE": "SUV"
     }
   ]
 }

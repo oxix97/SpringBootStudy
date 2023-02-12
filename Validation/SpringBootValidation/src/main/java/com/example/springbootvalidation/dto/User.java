@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
     @NotBlank
@@ -56,6 +59,17 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    @AssertTrue(message = "yyyyMM형식이 아닙니다.")
+    public boolean isCheckReqYearMonth() {
+        String text = this.reqYearMonth + "01";
+        try {
+            LocalDate localDate = LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyyMMdd"));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

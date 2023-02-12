@@ -2,12 +2,16 @@ package com.example.springbootvalidation.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
     private String name;
     private int age;
+    @Email
     private String email;
+    @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$")
     private String phoneNumber;
 
     public String getName() {

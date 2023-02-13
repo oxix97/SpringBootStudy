@@ -5,16 +5,17 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
     @NotNull
+    @Size(min = 2, max = 10)
     private String name;
 
     @NotNull
     @Min(value = 1)
-    @Max(value = 90)
-    private int age;
+    private Integer age;
 
     public String getName() {
         return name;

@@ -18,9 +18,9 @@ public class ApiController {
     public User getUser(
             @Size(min = 2)
             @RequestParam String name,
+
             @NotNull
-            @Min(value = 1)
-            @Max(value = 90)
+            @Min(1)
             @RequestParam Integer age) {
         User user = new User();
         user.setName(name);

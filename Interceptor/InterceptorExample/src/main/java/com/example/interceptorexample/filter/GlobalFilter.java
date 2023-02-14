@@ -11,7 +11,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 import java.io.IOException;
 
 @Slf4j
-@WebFilter("/api/*")
+//@WebFilter("/api/*")
 public class GlobalFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

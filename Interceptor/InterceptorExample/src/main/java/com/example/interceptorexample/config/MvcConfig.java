@@ -15,5 +15,6 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //addPathPatterns에 내가 원하는 주소만 넣어도 된다.
         registry.addInterceptor(authInterceptor);
+        //해당 인터셉터를 추가하게 되면 단계적으로 실행하여 부가적으로 로직을 구현하여도 좋다.
     }
 }

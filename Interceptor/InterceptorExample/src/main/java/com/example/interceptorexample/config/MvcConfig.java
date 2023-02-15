@@ -14,6 +14,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //addPathPatterns에 내가 원하는 주소만 넣어도 된다.
-        registry.addInterceptor(authInterceptor).addPathPatterns("/api/private/*");
+        registry.addInterceptor(authInterceptor);
     }
 }

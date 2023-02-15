@@ -1,5 +1,6 @@
 package com.example.hopecoroutine.service;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
@@ -12,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @Service
 public class AsyncService {
 
-    @Async
+    @Async("async-thread")
     public CompletableFuture run() throws InterruptedException {
         return CompletableFuture.completedFuture(hello());
     }

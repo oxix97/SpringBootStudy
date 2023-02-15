@@ -5,6 +5,7 @@ import com.example.restserver.dto.ResponseUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiController {
 
     @GetMapping("/hello")
-    public ResponseUser hello() {
-        return new ResponseUser("Chan", 27);
+    public ResponseUser hello(
+            @RequestParam String name,
+            @RequestParam int age) {
+        return new ResponseUser(name, age);
     }
 }

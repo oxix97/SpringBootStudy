@@ -16,14 +16,29 @@ public class ApiController {
         return new ResponseUser(name, age);
     }
 
+    @PostMapping("/exchange/{name}/age/{age}")
+    public ResponseUser exchange(
+            @RequestBody ResponseUser user,
+            @PathVariable String name,
+            @PathVariable int age,
+            @RequestHeader("Authorization") String auth
+    ) {
+        log.info("name : {}, age : {}", name, age);
+        log.info("user : {}", user);
+        log.info("header : {}", auth);
+
+        return user;
+    }
+
     @PostMapping("/user/{name}/age/{age}")
     public ResponseUser user(
             @RequestBody ResponseUser user,
             @PathVariable String name,
             @PathVariable int age
     ) {
-        log.info("name : {}, age : {}",name,age);
-        log.info("user : {}",user);
+        log.info("name : {}, age : {}", name, age);
+        log.info("user : {}", user);
+
         return user;
     }
 }

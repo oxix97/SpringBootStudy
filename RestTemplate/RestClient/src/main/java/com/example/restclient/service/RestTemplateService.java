@@ -4,6 +4,8 @@ import com.example.restclient.dto.request.RequestUser;
 import com.example.restclient.dto.response.ResponseUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -40,7 +42,7 @@ public class RestTemplateService {
                 .path("/api/server/user/{name}/age/{age}")
                 .encode()
                 .build()
-                .expand("Chan",27)
+                .expand("Chan", 27)
                 .toUri();
         log.info("uri : {}", uri);
 
@@ -53,5 +55,28 @@ public class RestTemplateService {
         log.info("response body : {}", response.getBody());
 
         return response.getBody();
+    }
+
+    public ResponseUser exchange() {
+        RequestUser req = new RequestUser("ACON", 1111);
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:9090")
+                .path("/api/server/exchange/{name}/age/{age}")
+                .encode()
+                .build()
+                .expand(req.getName(), req.getAge())
+                .toUri();
+        log.info("uri : {}", uri);
+
+        //http body -> obejct -> object mapper -> json -> ...
+        RestTemplate template = new RestTemplate();
+        RequestEntity<RequestUser> reqEntity = RequestEntity.post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "asdf")
+                .body(req);
+
+        ResponseEntity<ResponseUser> response = template.exchange(reqEntity, ResponseUser.class);
+        return response.getBody();
+
     }
 }

@@ -25,4 +25,9 @@ public class ApiController {
     public ResponseUser user() {
         return service.post();
     }
+
+    @GetMapping("/exchange")
+    public ResponseUser exchange() {
+        return service.exchange();
+    }
 }

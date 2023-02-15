@@ -1,5 +1,6 @@
 package com.example.restclient.controller;
 
+import com.example.restclient.dto.response.ResponseUser;
 import com.example.restclient.service.RestTemplateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +16,7 @@ public class ApiController {
     private final RestTemplateService service;
 
     @GetMapping("/hello")
-    public String hello() {
+    public ResponseUser hello() {
         return service.hello();
     }
 }

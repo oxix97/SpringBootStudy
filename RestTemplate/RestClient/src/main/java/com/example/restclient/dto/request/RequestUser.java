@@ -1,4 +1,4 @@
-package com.example.restserver.dto;
+package com.example.restclient.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ResponseUser {
+public class RequestUser {
     private String name;
     private int age;
 }

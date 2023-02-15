@@ -12,7 +12,7 @@ import java.util.concurrent.CompletableFuture;
 @Slf4j
 @Service
 public class AsyncService {
-
+    //Async는 AOP패턴 기반이기 때문에 proxy패턴에 따릅니다. public메서드에만 사용 가능합니다.
     @Async("async-thread")
     public CompletableFuture run() throws InterruptedException {
         return CompletableFuture.completedFuture(hello());

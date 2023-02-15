@@ -1,6 +1,7 @@
 package com.example.interceptorexample.interceptor;
 
 import com.example.interceptorexample.annotation.Auth;
+import jakarta.security.auth.message.AuthException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +39,10 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (hasAnnotation) { //권한 체크
             String query = uri.getQuery();
             log.info("query : {}", query);
-            return query.contains("name=Chan");
+            if (!query.contains("name=Chan")) {
+                throw new AuthException();
+            }
+            return true;
         }
 
         //return value -> false : filter -> dispatcher -> interceptor -> 진입 불가.

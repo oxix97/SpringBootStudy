@@ -16,8 +16,9 @@ public class ApiController {
 
     @GetMapping("/hello")
     public String hello() throws InterruptedException {
-        service.hello();
-        log.info("hello : {}", "hello");
+        log.info("init completableFuture");
+        service.run();
+        log.info("hello");
         return "hello";
     }
 }

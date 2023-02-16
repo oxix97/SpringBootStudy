@@ -7,18 +7,6 @@ import java.util.Map;
 
 public class BaseUri {
     private static final String baseUri = "http://localhost:9090";
-
-    public static URI uri(String path, Map<String, Object> map) {
-        return UriComponentsBuilder
-                .fromUriString(baseUri)
-                .path(path)
-                .encode()
-                .build()
-                .expand(map)
-                .toUri();
-
-    }
-
     public static URI uri(String path) {
         return UriComponentsBuilder
                 .fromUriString(baseUri)

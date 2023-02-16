@@ -32,7 +32,7 @@ public class ApiController {
 //    }
 
     @GetMapping("/exchange")
-    public Req<ResponseUser> exchange() {
+    public ResponseUser exchange() {
         return service.genericExchange();
     }
 }

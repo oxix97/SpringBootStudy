@@ -1,6 +1,6 @@
 package com.example.restclient.service;
 
-import com.example.restclient.base.BaseRequestEntity;
+import com.example.restclient.base.BaseEntity;
 import com.example.restclient.base.BaseUri;
 import com.example.restclient.dto.request.Req;
 import com.example.restclient.dto.request.RequestUser;
@@ -8,6 +8,7 @@ import com.example.restclient.dto.response.ResponseUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,7 @@ public class RestTemplateService {
 
         RestTemplate template = new RestTemplate();
         ResponseUser result = template.getForEntity(uri, ResponseUser.class).getBody();
+        log.info("result : {}", result);
         return result;
     }
 
@@ -44,17 +46,22 @@ public class RestTemplateService {
     public ResponseUser post() {
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:9090")
-                .path("/api/server/user/{name}/age/{age}")
+                .path("/api/server/user")
                 .encode()
                 .build()
-                .expand("Chan", 27)
                 .toUri();
         log.info("uri : {}", uri);
 
         //http body -> obejct -> object mapper -> json -> ...
         RestTemplate template = new RestTemplate();
-        RequestUser req = new RequestUser("aaaaa", 100);
-        ResponseEntity<ResponseUser> response = template.postForEntity(uri, req, ResponseUser.class);
+        RequestUser user = new RequestUser("aaaaa", 100);
+
+        RequestEntity<RequestUser> request = RequestEntity.post(uri)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "head")
+                .body(user);
+
+        ResponseEntity<ResponseUser> response = template.exchange(request, ResponseUser.class);
 
         log.info("response status : {}", response.getStatusCode());
         log.info("response body : {}", response.getBody());
@@ -84,38 +91,24 @@ public class RestTemplateService {
         return response.getBody();
     }
 
-    public Req<ResponseUser> genericExchange() {
+    public ResponseUser genericExchange() {
         RequestUser request = new RequestUser("SSSSSSS", 1111);
-        ObjectMapper mapper = new ObjectMapper();
+        URI uri = BaseUri.uri("/api/server/exchange");
 
-        URI uri = BaseUri.uri(
-                "/api/server/exchange/{name}/age/{age}",
-                mapper.convertValue(request, Map.class)
-        );
-
-        log.info("uri : {}", uri);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "auth");
+        headers.add("Custom", "custom");
 
         Req<RequestUser> req = new Req<>();
-        req.setHeader(new Req.Header());
+        req.setHeaders(headers);
         req.setResponseBody(request);
 
-//        http body -> obejct -> object mapper -> json -> ...
         RestTemplate template = new RestTemplate();
 
-        BaseRequestEntity<Req<RequestUser>> entity = new BaseRequestEntity<>();
+        BaseEntity<RequestUser, ResponseUser> entity = new BaseEntity<>();
+        RequestEntity<RequestUser> reqEntity = entity.requestEntity(uri, req.getHeaders(), req.getResponseBody());
+        ResponseEntity<ResponseUser> resEntity = template.exchange(reqEntity, new ParameterizedTypeReference<ResponseUser>() {});
 
-        RequestEntity<Req<RequestUser>> reqEntity =
-                RequestEntity.post(uri)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "asdf")
-                        .body(req);
-        RequestEntity<Req<RequestUser>> requestEntity = entity.requestEntity(uri, req);
-
-        //        제네릭에는 클래스를 사용할 수 없다.
-        ResponseEntity<Req<ResponseUser>> response =
-                template.exchange(reqEntity, new ParameterizedTypeReference<>() {
-                });
-
-        return response.getBody();
+        return resEntity.getBody();
     }
 }

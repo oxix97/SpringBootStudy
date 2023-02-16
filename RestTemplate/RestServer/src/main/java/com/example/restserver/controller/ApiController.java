@@ -3,9 +3,8 @@ package com.example.restserver.controller;
 
 import com.example.restserver.dto.Req;
 import com.example.restserver.dto.ResponseUser;
-import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -36,15 +35,24 @@ public class ApiController {
         return response;
     }
 
-    @PostMapping("/user/{name}/age/{age}")
+    @PostMapping("/user")
     public ResponseUser user(
-            @RequestBody ResponseUser user,
-            @PathVariable String name,
-            @PathVariable int age
+            @RequestHeader("Authorization") String auth,
+            @RequestBody ResponseUser user
     ) {
-        log.info("name : {}, age : {}", name, age);
-        log.info("user : {}", user);
-
+        log.info("header : {}", auth);
+        log.info("body : {}", user);
         return user;
     }
+
+    @PostMapping("/exchange")
+    public ResponseUser genericExchange(
+            @RequestHeader HttpHeaders headers,
+            @RequestBody ResponseUser user
+    ) {
+        log.info("header : {}", headers);
+        log.info("body : {}", user);
+        return user;
+    }
+
 }

@@ -3,6 +3,8 @@ package com.example.springjunit.controller;
 import com.example.springjunit.api.MarketApi;
 import com.example.springjunit.calculator.Calculator;
 import com.example.springjunit.calculator.DollarCalculator;
+import com.example.springjunit.dto.Number;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebM
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -40,5 +43,20 @@ public class CalculatorControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string("60000"))
                 .andDo(MockMvcResultHandlers.print());
 
+    }
+
+    @Test
+    public void minusTest() throws Exception {
+        Number number = new Number(10, 10);
+
+        String json = new ObjectMapper().writeValueAsString(number);
+
+        mvc.perform(MockMvcRequestBuilders.post("http://localhost:8080/api/dollar/minus")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.result").value("0"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.body.resultCode").value("OK"))
+                .andDo(MockMvcResultHandlers.print());
     }
 }

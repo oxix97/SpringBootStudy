@@ -2,10 +2,11 @@ package com.example.springjunit.calculator;
 
 import com.example.springjunit.api.MarketApi;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
-@Component("Dollar")
+@Component("dollar")
 public class DollarCalculator implements ICalculator {
     private int price = 1;
     private final MarketApi api;

@@ -1,12 +1,18 @@
 package com.example.springjunit.calculator;
 
-import org.example.api.MarketApi;
+import com.example.springjunit.api.MarketApi;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
+@Component("Dollar")
 public class DollarCalculator implements ICalculator {
     private int price = 1;
+    private final MarketApi api;
 
-    public DollarCalculator(MarketApi api) {
-        this.price = api.connect();
+    @Override
+    public void init() {
+        this.price = api.dollar();
     }
 
     @Override

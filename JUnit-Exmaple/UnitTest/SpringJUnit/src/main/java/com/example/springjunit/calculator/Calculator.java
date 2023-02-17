@@ -1,17 +1,20 @@
 package com.example.springjunit.calculator;
 
-public class Calculator {
-    private ICalculator iCalculator;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-    public Calculator(ICalculator iCalculator) {
-        this.iCalculator = iCalculator;
-    }
+@RequiredArgsConstructor
+@Component
+public class Calculator {
+    private final ICalculator iCalculator;
 
     public int sum(int x, int y) {
+        iCalculator.init();
         return iCalculator.sum(x, y);
     }
 
     public int minus(int x, int y) {
+        iCalculator.init();
         return iCalculator.minus(x, y);
     }
 }

@@ -15,4 +15,13 @@ public class ResLocalSearch {
     private Integer start;
 
     private List<Item> items;
+
+    @Data
+    public static class Item {
+        private String title;
+        private String link;
+        private String thumbnail;
+        private String sizeheight;
+        private String sizewidth;
+    }
 }

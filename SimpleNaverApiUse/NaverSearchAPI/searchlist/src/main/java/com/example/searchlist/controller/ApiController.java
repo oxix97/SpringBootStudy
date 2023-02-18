@@ -22,13 +22,18 @@ public class ApiController {
     }
 
     @PostMapping("/naver/add")
-    public void add(@RequestBody WishListDto body) {
+    public void itemAdd(@RequestBody WishListDto body) {
         service.add(body);
     }
 
-//    @DeleteMapping("/naver/delete")
-//    public void delete(@RequestParam String ) {
-//        service.delete();
-//    }
+    @GetMapping("/naver/all")
+    public List<WishListDto> findAll() {
+        return service.findAll();
+    }
+
+    @DeleteMapping("/naver/delete")
+    public void delete(@RequestParam Integer index) {
+        service.delete(index);
+    }
 
 }

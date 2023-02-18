@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -55,11 +58,13 @@ public class NaverService {
         entityToDto(entity);
     }
 
-    public void delete(WishListDto dto) {
-        var entity = dtoToEntity(dto);
-        repository.deleteById(entity.getIndex());
+    public void delete(Integer index) {
+        repository.deleteById(index);
     }
 
+    public List<WishListDto> findAll() {
+        return repository.listAll().stream().map(this::entityToDto).toList();
+    }
 
 
     private WishListEntity dtoToEntity(WishListDto dto) {

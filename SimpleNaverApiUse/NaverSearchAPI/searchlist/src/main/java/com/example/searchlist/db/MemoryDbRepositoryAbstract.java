@@ -13,7 +13,7 @@ public class MemoryDbRepositoryAbstract<T extends MemoryEntity> implements Memor
 
     @Override
     public Optional<T> findById(int idx) {
-        return db.stream().filter(it -> it.getIndex() == index).findFirst();
+        return db.stream().filter(it -> it.getIndex() == idx).findFirst();
     }
 
     @Override

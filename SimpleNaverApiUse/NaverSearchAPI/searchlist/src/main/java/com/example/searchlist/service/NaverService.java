@@ -4,6 +4,9 @@ import com.example.searchlist.client.NaverClient;
 import com.example.searchlist.dto.ReqImageSearch;
 import com.example.searchlist.dto.ReqLocalSearch;
 import com.example.searchlist.dto.WishListDto;
+import com.example.searchlist.wishlist.WishListRepository;
+import com.example.searchlist.wishlist.entity.WishListEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class NaverService {
     private final NaverClient client;
+    private final ObjectMapper mapper;
+    private final WishListRepository repository;
 
     public WishListDto search(String query) {
         var localReq = new ReqLocalSearch();
@@ -42,5 +47,26 @@ public class NaverService {
             }
         }
         return new WishListDto();
+    }
+
+    public void add(WishListDto dto) {
+        var entity = dtoToEntity(dto);
+        repository.save(entity);
+        entityToDto(entity);
+    }
+
+    public void delete(WishListDto dto) {
+        var entity = dtoToEntity(dto);
+        repository.deleteById(entity.getIndex());
+    }
+
+
+
+    private WishListEntity dtoToEntity(WishListDto dto) {
+        return mapper.convertValue(dto, WishListEntity.class);
+    }
+
+    private WishListDto entityToDto(WishListEntity entity) {
+        return mapper.convertValue(entity, WishListDto.class);
     }
 }

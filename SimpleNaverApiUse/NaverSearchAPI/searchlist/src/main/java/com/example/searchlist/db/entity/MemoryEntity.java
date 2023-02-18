@@ -5,5 +5,5 @@ import lombok.Data;
 
 @Data
 public class MemoryEntity {
-    protected int index;
+    protected Integer index;
 }

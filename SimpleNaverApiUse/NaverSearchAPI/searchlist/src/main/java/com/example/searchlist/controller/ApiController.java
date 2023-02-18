@@ -4,10 +4,9 @@ import com.example.searchlist.dto.WishListDto;
 import com.example.searchlist.service.NaverService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,4 +20,15 @@ public class ApiController {
     public WishListDto naverSearch(@RequestParam String query) {
         return service.search(query);
     }
+
+    @PostMapping("/naver/add")
+    public void add(@RequestBody WishListDto body) {
+        service.add(body);
+    }
+
+//    @DeleteMapping("/naver/delete")
+//    public void delete(@RequestParam String ) {
+//        service.delete();
+//    }
+
 }

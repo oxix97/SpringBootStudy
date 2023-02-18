@@ -1,10 +1,10 @@
-package com.example.swaggertest;
+package com.example.searchlist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SwaggerTestApplicationTests {
+class SearchlistApplicationTests {
 
     @Test
     void contextLoads() {

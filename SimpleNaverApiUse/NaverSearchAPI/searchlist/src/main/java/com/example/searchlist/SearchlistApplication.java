@@ -1,13 +1,13 @@
-package com.example.swaggertest;
+package com.example.searchlist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SwaggerTestApplication {
+public class SearchlistApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SwaggerTestApplication.class, args);
+        SpringApplication.run(SearchlistApplication.class, args);
     }
 
 }

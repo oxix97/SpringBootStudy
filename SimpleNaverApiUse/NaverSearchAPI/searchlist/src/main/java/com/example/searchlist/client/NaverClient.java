@@ -1,10 +1,10 @@
-package com.example.searchlist.service;
+package com.example.searchlist.client;
 
 import com.example.searchlist.dto.ReqImageSearch;
 import com.example.searchlist.dto.ReqLocalSearch;
 import com.example.searchlist.dto.ResImageSearch;
 import com.example.searchlist.dto.ResLocalSearch;
-import com.example.searchlist.service.base.BaseService;
+import com.example.searchlist.client.base.BaseClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -16,8 +16,8 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @Service
-public class NaverService {
-    private final BaseService service;
+public class NaverClient {
+    private final BaseClient service;
 
     @Value("${url_local}")
     private String localUrl;

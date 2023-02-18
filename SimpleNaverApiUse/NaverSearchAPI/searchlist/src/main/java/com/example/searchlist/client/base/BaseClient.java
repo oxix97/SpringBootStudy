@@ -1,4 +1,4 @@
-package com.example.searchlist.service.base;
+package com.example.searchlist.client.base;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -10,7 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Service
-public class BaseService {
+public class BaseClient {
     @Value("${client_id}")
     private String clientId;
     @Value("${client_secret}")

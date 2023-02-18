@@ -1,18 +1,16 @@
-package com.example.searchlist.service;
+package com.example.searchlist.client;
 
 import com.example.searchlist.dto.ReqImageSearch;
 import com.example.searchlist.dto.ReqLocalSearch;
-import com.example.searchlist.service.base.BaseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
-public class NaverServiceTest {
+public class NaverClientTest {
 
     @Autowired
-    private NaverService service;
+    private NaverClient service;
 
     @Test
     public void localSearchTest() {

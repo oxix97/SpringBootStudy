@@ -14,5 +14,15 @@ public class ResImageSearch {
 
     private Integer start;
 
-    private List<ImageItem> items;
+    private List<Item> items;
+
+    @Data
+    static class Item {
+        private String title;
+        private String link;
+        private String thumbnail;
+        private String sizeheight;
+        private String sizewidth;
+    }
+
 }

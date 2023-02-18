@@ -20,8 +20,12 @@ public class ResLocalSearch {
     public static class Item {
         private String title;
         private String link;
-        private String thumbnail;
-        private String sizeheight;
-        private String sizewidth;
+        private String category;
+        private String description;
+        private String telephone;
+        private String address;
+        private String roadAddress;
+        private String mapy;
+        private String mapx;
     }
 }

@@ -54,11 +54,23 @@ public class NaverService {
 
     public void add(WishListDto dto) {
         var entity = dtoToEntity(dto);
+
         repository.save(entity);
         entityToDto(entity);
     }
 
-    public void delete(Integer index) {
+    public void addVisited(int index) {
+        var dto = repository.findById(index);
+        log.info("index : {}", index);
+        log.info("dto : {}", dto);
+        if (dto.isPresent()) {
+            var item = dto.get();
+            item.setVisited(true);
+            item.setVisitCount(item.getVisitCount() + 1);
+        }
+    }
+
+    public void delete(int index) {
         repository.deleteById(index);
     }
 

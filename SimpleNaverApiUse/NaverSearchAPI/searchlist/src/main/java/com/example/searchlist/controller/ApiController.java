@@ -26,6 +26,13 @@ public class ApiController {
         service.add(body);
     }
 
+    @PostMapping("/naver/visit/{index}")
+    public void addVisit(
+            @PathVariable("index") int index
+    ) {
+        service.addVisited(index);
+    }
+
     @GetMapping("/naver/all")
     public List<WishListDto> findAll() {
         return service.findAll();

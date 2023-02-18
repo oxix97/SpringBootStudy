@@ -10,14 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class NaverClientTest {
 
     @Autowired
-    private NaverClient service;
+    private NaverClient client;
 
     @Test
     public void localSearchTest() {
         var search = new ReqLocalSearch();
         search.setQuery("갈비집");
 
-        var result = service.searchLocal(search);
+        var result = client.searchLocal(search);
         System.out.println(result);
     }
 
@@ -26,7 +26,7 @@ public class NaverClientTest {
         var search = new ReqImageSearch();
         search.setQuery("갈비집");
 
-        var result = service.searchImage(search);
+        var result = client.searchImage(search);
         System.out.println(result);
     }
 }

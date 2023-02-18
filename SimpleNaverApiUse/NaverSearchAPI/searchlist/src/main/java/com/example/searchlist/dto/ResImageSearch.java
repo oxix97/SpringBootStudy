@@ -17,7 +17,7 @@ public class ResImageSearch {
     private List<Item> items;
 
     @Data
-    static class Item {
+    public static class Item {
         private String title;
         private String link;
         private String thumbnail;

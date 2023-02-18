@@ -1,6 +1,8 @@
 package com.example.searchlist.service;
 
+import com.example.searchlist.dto.ReqImageSearch;
 import com.example.searchlist.dto.ReqLocalSearch;
+import com.example.searchlist.dto.ResImageSearch;
 import com.example.searchlist.dto.ResLocalSearch;
 import com.example.searchlist.service.base.BaseService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,6 @@ public class NaverService {
     private String imageUrl;
 
     public ResLocalSearch searchLocal(ReqLocalSearch query) {
-        BaseService base = new BaseService();
         URI uri = service.uriBuilder(query.toMultiValueMap(), localUrl);
         HttpHeaders headers = service.baseHeaders();
 
@@ -36,7 +37,15 @@ public class NaverService {
         return response.getBody();
     }
 
-    public void searchImage() {
+    public ResImageSearch searchImage(ReqImageSearch query) {
+        URI uri = service.uriBuilder(query.toMultiValueMap(), imageUrl);
+        HttpHeaders headers = service.baseHeaders();
 
+        var httpEntity = new HttpEntity<>(headers);
+        var responseType = new ParameterizedTypeReference<ResImageSearch>() {
+        };
+        var response = new RestTemplate().exchange(uri, HttpMethod.GET, httpEntity, responseType);
+
+        return response.getBody();
     }
 }

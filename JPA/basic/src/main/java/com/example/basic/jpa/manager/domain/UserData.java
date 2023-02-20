@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 public class UserData {
-    @Id
     @GeneratedValue
-    private Long id;
+    @Id
+    private int id;
 
     @NonNull
     private String name;

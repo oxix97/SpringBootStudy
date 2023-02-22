@@ -1,5 +1,6 @@
 package com.example.basic.jpa.manager.repository;
 
+import com.example.basic.jpa.manager.domain.Gender;
 import com.example.basic.jpa.manager.domain.UserData;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,7 +51,15 @@ class UserRepositoryTest {
         printList();
 
         //update false기 때문에 에러
-        repository.getReferenceById((long) 6).setCreatedAt(LocalDateTime.now());
+//        repository.getReferenceById((long) 6).setCreatedAt(LocalDateTime.now());
+    }
+
+    @Test
+    void enumTest() {
+        UserData data = new UserData("Chan", "email@email");
+        data.setGender(Gender.MALE);
+        repository.save(data);
+        printList();
     }
 
 //    @Test

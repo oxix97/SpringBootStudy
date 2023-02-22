@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 //        sequenceName = "BOARD_SEQ"
 //)
 public class UserData {
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
+    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GEN")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
@@ -26,6 +26,8 @@ public class UserData {
 
     @NonNull
     private String email;
+
+    private Gender gender;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;

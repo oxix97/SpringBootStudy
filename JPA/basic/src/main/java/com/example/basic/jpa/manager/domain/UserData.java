@@ -27,6 +27,7 @@ public class UserData {
     @NonNull
     private String email;
 
+    @Enumerated(value = EnumType.STRING)
     private Gender gender;
 
     @Column(updatable = false)

@@ -56,10 +56,17 @@ class UserRepositoryTest {
 
     @Test
     void enumTest() {
-        UserData data = new UserData("Chan", "email@email");
-        data.setGender(Gender.MALE);
-        repository.save(data);
-        printList();
+        UserData test = repository.findById(1L).orElseThrow(RuntimeException::new);
+        test.setGender(Gender.MALE);
+
+        repository.save(test);
+        repository.findAll().forEach(System.out::println);
+
+        //Enum 클래스에 저장된 인덱스 값으로 나오게 된다. 결과 : 0
+        // 데이터베이스에 gender 값은 Enum클래스의 0번째 필드로 이루어졌다는 뜻이다. -> 0: MALE, 1:FEMALE 로 지정됨
+        //문제는 ENUM 클래스에 요소가 추가되면 값이 변경될 가능성이 있다.
+        // 그렇기 때문에 ORDINAL이 아닌 String으로 지정하는것이 좋다. -> MALE 출력
+        System.out.println(repository.findRawRecord().get("gender"));
     }
 
 //    @Test

@@ -28,6 +28,8 @@ class BookRepositoryTest {
 
     @Test
     void printList() {
+        persistTest();
+        updateTest();
         repository.findAll().forEach(System.out::println);
     }
 }

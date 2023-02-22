@@ -9,10 +9,11 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(value = BookEntityListener.class)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
-public class Book {
+public class Book implements Auditable {
     @Id
     @GeneratedValue
     private Long id;
@@ -26,14 +27,14 @@ public class Book {
 
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdated() {
-        this.updatedAt = LocalDateTime.now();
-    }
+//    @PrePersist
+//    public void prePersist() {
+//        this.createdAt = LocalDateTime.now();
+//        this.updatedAt = LocalDateTime.now();
+//    }
+//
+//    @PreUpdate
+//    public void preUpdated() {
+//        this.updatedAt = LocalDateTime.now();
+//    }
 }

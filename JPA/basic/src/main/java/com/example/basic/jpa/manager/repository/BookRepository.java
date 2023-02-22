@@ -1,0 +1,12 @@
+package com.example.basic.jpa.manager.repository;
+
+import com.example.basic.jpa.manager.domain.Book;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface BookRepository extends JpaRepository<Book, Long> {
+    Book findByName(String name);
+
+    Book findBookById(Long id);
+}

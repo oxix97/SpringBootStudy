@@ -27,7 +27,9 @@ public class UserData {
     @NonNull
     private String email;
 
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
+    @Column(updatable = false)
     private LocalDateTime updatedAt;
 }

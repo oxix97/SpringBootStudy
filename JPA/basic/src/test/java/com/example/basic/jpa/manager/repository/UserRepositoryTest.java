@@ -2,6 +2,7 @@ package com.example.basic.jpa.manager.repository;
 
 import com.example.basic.jpa.manager.domain.UserData;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @SpringBootTest
@@ -45,6 +47,9 @@ class UserRepositoryTest {
         data.setName("Chan");
         repository.save(data);
         printList();
+
+        //update false기 때문에 에러
+        repository.getReferenceById((long) 6).setCreatedAt(LocalDateTime.now());
     }
 
 //    @Test
@@ -85,17 +90,4 @@ class UserRepositoryTest {
 //        UserData data = repository.findByByName("dennis");
 //        System.out.println("data : "+data);
 //    }
-
-    @Test
-    void pagingTest() {
-        List<UserData> data1 = repository.findPageByName("martin",
-                PageRequest.of(1, 1,
-                        Sort.by(Sort.Order.desc("id"))))
-                .getContent();
-
-        List<UserData> data2 = repository.findSliceByName("martin",
-                PageRequest.of(1,1,Sort.by(Sort.Order.desc("id"))));
-        System.out.println(data1);
-        System.out.println(data2.getContent());
-    }
 }

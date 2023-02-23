@@ -1,22 +1,20 @@
 package com.example.basic.jpa.manager.domain;
 
+import com.example.basic.jpa.manager.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
-
+//@NoArgsConstructor
 @Entity
+@Getter
+@Setter
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EntityListeners({AuditingEntityListener.class})
-@Data
-public class BookHistory {
+public class BookHistory extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -26,10 +24,4 @@ public class BookHistory {
 
     @NonNull
     private String author;
-
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 }

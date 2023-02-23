@@ -1,5 +1,6 @@
 package com.example.bookreview.domain.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -9,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@Entity
 public class Book extends BaseEntity {
     @Id
     @GeneratedValue

@@ -8,6 +8,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Entity
 public class UserHistory extends BaseEntity {
     @Id
     @GeneratedValue

@@ -19,19 +19,14 @@ class UserHistoryRepositoryTest {
     @Autowired
     private UserHistoryRepository historyRepository;
 
-    private UserInfo userInfo;
-
     @BeforeEach()
     void initUser() {
-        userInfo = new UserInfo();
+        UserInfo userInfo = new UserInfo();
         userInfo.setName("chan");
         userInfo.setEmail("ieejo");
         userInfo.setGender(Gender.MALE);
         userInfoRepository.save(userInfo);
-    }
 
-    @Test
-    void userHistoryTest() {
         userInfo.setName("Chan");
         userInfo.setEmail("chan@naver.com");
         userInfo.setGender(Gender.FEMALE);
@@ -42,15 +37,18 @@ class UserHistoryRepositoryTest {
 
         userInfo.setGender(Gender.MALE);
         userInfoRepository.save(userInfo);
-        historyRepository.findAll().forEach(System.out::println);
-        System.out.println(userInfo);
     }
 
     @Test
-    void emailFindUserHistory() {
-        userHistoryTest();
-        UserInfo user = userInfoRepository.findByEmail("chan@kakao.com");
-        List<UserHistory> histories = user.getUserHistories();
-        histories.forEach(System.out::println);
+    void userHistoryTest() { // 1대 N 연관
+        for (UserInfo data : userInfoRepository.findAll()) {
+            System.out.println(data);
+            data.getUserHistories().forEach(System.out::println);
+        }
+    }
+
+    @Test
+    void userHaveHistoryTest() { // N대 1 연관
+        historyRepository.findAll().forEach(System.out::println);
     }
 }

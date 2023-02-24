@@ -15,6 +15,7 @@ public class UserHistory extends BaseEntity {
     private Long id;
 
     //    @ForeignKey
+    @Column(name = "user_id")
     private Long userId;
 
     @NonNull
@@ -25,5 +26,4 @@ public class UserHistory extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
 }

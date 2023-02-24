@@ -13,7 +13,6 @@ public class UserHistoryListener {
     public void postPersistAndPostUpdate(Object obj) {
         UserHistoryRepository repository = BeanUtils.getBean(UserHistoryRepository.class);
         UserInfo userInfo = (UserInfo) obj;
-
         UserHistory history = new UserHistory();
         history.setUserId(userInfo.getId());
         history.setName(userInfo.getName());

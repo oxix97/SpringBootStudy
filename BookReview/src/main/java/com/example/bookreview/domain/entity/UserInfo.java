@@ -4,6 +4,9 @@ import com.example.bookreview.domain.listener.UserHistoryListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
@@ -24,4 +27,8 @@ public class UserInfo extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<UserHistory> userHistories = new ArrayList<>();
 }

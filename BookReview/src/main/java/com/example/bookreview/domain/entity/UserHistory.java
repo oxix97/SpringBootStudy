@@ -11,7 +11,7 @@ import lombok.*;
 @Entity
 public class UserHistory extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     //    @ForeignKey
@@ -25,4 +25,5 @@ public class UserHistory extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
 }

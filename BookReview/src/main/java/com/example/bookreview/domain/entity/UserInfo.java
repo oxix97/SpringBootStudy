@@ -1,5 +1,6 @@
 package com.example.bookreview.domain.entity;
 
+import com.example.bookreview.domain.listener.UserHistoryListener;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,10 +9,11 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
+@EntityListeners(value = UserHistoryListener.class)
 @Entity
-public class User extends BaseEntity {
+public class UserInfo extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NonNull

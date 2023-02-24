@@ -7,23 +7,18 @@ import lombok.*;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
 public class UserHistory extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //    @ForeignKey
-    @Column(name = "user_id")
+    @NonNull
     private Long userId;
-
     @NonNull
     private String name;
 
-    @NonNull
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    private Gender gender;
+    @ManyToOne
+    @ToString.Exclude
+    private UserInfo userInfo;
 }

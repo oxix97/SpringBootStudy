@@ -16,8 +16,7 @@ public class UserHistoryListener {
         UserHistory history = new UserHistory();
         history.setUserId(userInfo.getId());
         history.setName(userInfo.getName());
-        history.setEmail(userInfo.getEmail());
-        history.setGender(userInfo.getGender());
+        history.setUserInfo(userInfo);
         repository.save(history);
     }
 }

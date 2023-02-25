@@ -29,7 +29,7 @@ public class UserInfo extends BaseEntity {
     private Gender gender;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_info_id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_key",insertable = false, updatable = false)
     @ToString.Exclude
     private List<UserHistory> userHistories = new ArrayList<>();
 }

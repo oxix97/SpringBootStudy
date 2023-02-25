@@ -21,10 +21,10 @@ class BookReviewRepositoryTest {
     void init() {
         Book book = new Book();
         book.setName("JPA TEST");
-        book.setAuthor("CHan");
+//        book.setAuthor("CHan");
         book.setCategory("Spring");
         book.setAuthorId(1L);
-        book.setPublisherId(1L);
+//        book.setPublisherId(1L);
         bookRepository.save(book);
     }
 

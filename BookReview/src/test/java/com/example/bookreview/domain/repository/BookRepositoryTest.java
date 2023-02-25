@@ -15,12 +15,12 @@ class BookRepositoryTest {
     @Autowired
     private BookReviewRepository reviewRepository;
 
-    @Test
-    void bookTest() {
-        Book book = new Book(1L, 1L);
-        bookRepository.save(book);
-        bookRepository.findAll().forEach(System.out::println);
-    }
+//    @Test
+//    void bookTest() {
+//        Book book = new Book(1L, 1L);
+//        bookRepository.save(book);
+//        bookRepository.findAll().forEach(System.out::println);
+//    }
 
 //    @Test
 //    void bookTest2() {

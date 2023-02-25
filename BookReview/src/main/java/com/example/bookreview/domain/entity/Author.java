@@ -1,25 +1,33 @@
 package com.example.bookreview.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity
-public class Author extends BaseEntity{
+public class Author extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
 
-    @NonNull
+    //    @NonNull
     private String name;
 
-    private int country;
+    private Integer country;
 
-//    @ForeignKey
-    private Long bookId;
+    //    @ForeignKey
+    @ManyToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
+    private List<Book> books = new ArrayList<>();
+
+    public void addBook(Book... book) {
+        Collections.addAll(this.books, book);
+    }
 }

@@ -1,9 +1,9 @@
 package com.example.bookreview.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,4 +17,12 @@ public class Publisher extends BaseEntity {
 
     @NonNull
     private String name;
+
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    private List<Book> books;
+
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    private List<Author> authors;
 }

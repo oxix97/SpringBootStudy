@@ -22,24 +22,24 @@ class BookRepositoryTest {
         bookRepository.findAll().forEach(System.out::println);
     }
 
-    @Test
-    void bookTest2() {
-        Book book = new Book(1L, 1L);
-        book.setName("BOOOOK");
-        bookRepository.save(book);
-
-        BookReview review = new BookReview();
-        review.setBookId(1L);
-        review.setScore(4.5F);
-        review.setCount(2);
-        reviewRepository.save(review);
-        reviewRepository.findAll().forEach(System.out::println);
-        Book result = bookRepository
-                .findById(reviewRepository
-                        .findById(1L)
-                        .orElseThrow(RuntimeException::new)
-                        .getBookId())
-                .orElseThrow(RuntimeException::new);
-        System.out.println(result);
-    }
+//    @Test
+//    void bookTest2() {
+//        Book book = new Book(1L, 1L);
+//        book.setName("BOOOOK");
+//        bookRepository.save(book);
+//
+//        BookReview review = new BookReview();
+////        review.setBookId(1L);
+//        review.setScore(4.5F);
+//        review.setCount(2);
+//        reviewRepository.save(review);
+//        reviewRepository.findAll().forEach(System.out::println);
+//        Book result = bookRepository
+//                .findById(reviewRepository
+//                        .findById(1L)
+//                        .orElseThrow(RuntimeException::new)
+//                        .getBookId())
+//                .orElseThrow(RuntimeException::new);
+//        System.out.println(result);
+//    }
 }

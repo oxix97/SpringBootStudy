@@ -1,9 +1,11 @@
 package com.example.bookreview.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.example.bookreview.domain.listener.BookReviewListener;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +27,8 @@ public class Book extends BaseEntity {
     //    @ForeignKey
     @NonNull
     private Long publisherId;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_key", insertable = false, updatable = false)
+    private List<BookReview> reviews = new ArrayList<>();
 }

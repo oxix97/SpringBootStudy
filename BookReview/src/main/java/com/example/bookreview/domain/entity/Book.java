@@ -19,7 +19,8 @@ public class Book extends BaseEntity {
     private Long id;
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_key")
     @ToString.Exclude
     private List<Author> authors = new ArrayList<>();
 

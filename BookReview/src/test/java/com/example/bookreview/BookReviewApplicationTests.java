@@ -8,8 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class BookReviewApplicationTests {
 
-    @Autowired
-    private BookReviewRepository repository;
+    @Test
+    void contextLoads() {
+
+    }
 
 
 }

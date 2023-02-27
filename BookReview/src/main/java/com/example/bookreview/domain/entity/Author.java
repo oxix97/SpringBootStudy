@@ -23,7 +23,8 @@ public class Author extends BaseEntity {
     private Integer country;
 
     //    @ForeignKey
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_key")
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
 

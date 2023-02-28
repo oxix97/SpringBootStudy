@@ -5,9 +5,9 @@ spring:
     password: 123
     driver-class-name: com.mysql.jdbc.Driver
 
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
   jpa:
     show-sql: true
     properties:
@@ -19,7 +19,7 @@ spring:
       ddl-auto: create-drop
 server:
   port: 8080
-logging:
-  level:
-    sql: debug
-    org.hibernate.type: trace
+#logging:
+#  level:
+#    sql: debug
+#    org.hibernate.type: trace

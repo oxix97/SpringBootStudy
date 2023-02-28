@@ -22,6 +22,12 @@ public class UserService {
         user.setName("Chan");
         user.setEmail("chan@naver.com");
         manager.persist(user);
+        manager.detach(user);
         user.setGender(Gender.MALE);
+        manager.merge(user);
+
+        //clear()상태가 되면 남은 내역 모두 제거하기 때문에 웬만하면 clear전 flush를 하는 것이 좋다.
+        manager.flush();
+        manager.clear();
     }
 }

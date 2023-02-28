@@ -14,12 +14,9 @@ public class UserHistory extends BaseEntity {
     private Long id;
 
     @NonNull
-    @Column(name = "user_key")
-    private Long userId;
-    @NonNull
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
     @JoinColumn(name = "user_info_id")
     private UserInfo userInfo;

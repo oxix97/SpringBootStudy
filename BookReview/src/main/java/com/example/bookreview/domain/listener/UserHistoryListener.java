@@ -14,7 +14,7 @@ public class UserHistoryListener {
         UserHistoryRepository repository = BeanUtils.getBean(UserHistoryRepository.class);
         UserInfo userInfo = (UserInfo) obj;
         UserHistory history = new UserHistory();
-        history.setUserId(userInfo.getId());
+//        history.setUserId(userInfo.getId());
         history.setName(userInfo.getName());
         history.setUserInfo(userInfo);
         repository.save(history);

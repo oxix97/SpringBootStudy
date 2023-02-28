@@ -28,8 +28,7 @@ public class UserInfo extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_key",insertable = false, updatable = false)
-    @ToString.Exclude
+    @OneToMany(mappedBy = "userInfo",fetch = FetchType.EAGER)
+//    @ToString.Exclude
     private List<UserHistory> userHistories = new ArrayList<>();
 }

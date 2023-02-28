@@ -18,6 +18,9 @@ class UserServiceTest {
     void test() {
         service.put();
 
+        //service 단계에서 save로 인해 수정 사항을 db에 저장하지 않더라고 1차캐시와 비교하여 저장한 이후 반영한다.
+        //이는
+        System.out.println("---------------");
         System.out.println("---------- : "+repository.findByEmail("chan@naver.com"));
     }
 }

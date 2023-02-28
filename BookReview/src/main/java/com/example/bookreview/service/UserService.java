@@ -1,5 +1,6 @@
 package com.example.bookreview.service;
 
+import com.example.bookreview.domain.entity.Gender;
 import com.example.bookreview.domain.entity.UserInfo;
 import com.example.bookreview.domain.repository.UserInfoRepository;
 import jakarta.persistence.EntityManager;
@@ -12,11 +13,15 @@ public class UserService {
     @Autowired
     private UserInfoRepository repository;
 
+    @Autowired
+    private EntityManager manager;
+
     @Transactional
     public void put() {
         UserInfo user = new UserInfo();
         user.setName("Chan");
         user.setEmail("chan@naver.com");
-        repository.save(user);
+        manager.persist(user);
+        user.setGender(Gender.MALE);
     }
 }

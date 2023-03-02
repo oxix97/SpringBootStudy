@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,11 +26,17 @@ class BookRepositoryTest {
     }
 
     @Test
-    void queryTest() {
-        bookRepository.findBookNameAndCategory().forEach(data ->
-                System.out.println(data.get(0) + " : " + data.get(1))
-        );
+    void pagingTest() {
+        bookRepository.findBookNameAndCategory(PageRequest.of(0, 1)).forEach(book ->
+                System.out.println(book.getCategory() + " : " + book.getName()));
     }
+
+//    @Test
+//    void queryTest() {
+//        bookRepository.findBookNameAndCategory().forEach(data ->
+//                System.out.println(data.get(0) + " : " + data.get(1))
+//        );
+//    }
 
 //    @Test
 //    void bookTest() {

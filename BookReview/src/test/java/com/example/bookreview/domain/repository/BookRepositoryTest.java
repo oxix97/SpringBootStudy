@@ -2,6 +2,7 @@ package com.example.bookreview.domain.repository;
 
 import com.example.bookreview.domain.entity.Book;
 import com.example.bookreview.domain.entity.BookReview;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,21 @@ class BookRepositoryTest {
     private BookRepository bookRepository;
     @Autowired
     private BookReviewRepository reviewRepository;
+
+    @BeforeEach
+    void init() {
+        Book book = new Book();
+        book.setName("TEst1");
+        book.setCategory("BookTegory");
+        bookRepository.save(book);
+    }
+
+    @Test
+    void queryTest() {
+        bookRepository.findBookNameAndCategory().forEach(data ->
+                System.out.println(data.get(0) + " : " + data.get(1))
+        );
+    }
 
 //    @Test
 //    void bookTest() {

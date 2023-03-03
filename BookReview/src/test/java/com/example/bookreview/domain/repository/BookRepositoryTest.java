@@ -1,14 +1,13 @@
 package com.example.bookreview.domain.repository;
 
 import com.example.bookreview.domain.entity.Book;
-import com.example.bookreview.domain.entity.BookReview;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 @SpringBootTest
 class BookRepositoryTest {
@@ -19,16 +18,31 @@ class BookRepositoryTest {
 
     @BeforeEach
     void init() {
-        Book book = new Book();
-        book.setName("TEst1");
-        book.setCategory("BookTegory");
-        bookRepository.save(book);
+        for (int i = 1; i <= 5; i++) {
+            Book book = new Book();
+            book.setName("Test " + i);
+            book.setCategory("Book");
+            bookRepository.save(book);
+        }
     }
 
     @Test
     void pagingTest() {
         bookRepository.findBookNameAndCategory(PageRequest.of(0, 1)).forEach(book ->
                 System.out.println(book.getCategory() + " : " + book.getName()));
+    }
+
+    @Test
+    void queryTest() {
+        List<Book> books = bookRepository.findAll();
+        for (Book b : books) {
+            b.setName("Don't Need Native");
+        }
+//        System.out.println("--------------------------");
+        bookRepository.saveAll(books);
+        System.out.println("--------------------------");
+        System.out.println("count : " + bookRepository.updateNativeQuery("Need Native"));
+        System.out.println("--------------------------");
     }
 
 //    @Test

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 //    Book findByCategoryIsNullAndNameEqualsAndCreatedAtGreaterThanEuqualAndUpdatedAtGreaterThanEqual(String name);
@@ -29,4 +30,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Modifying
     @Query(value = "update book set name = :name", nativeQuery = true)
     int updateNativeQuery(String name);
+
+    @Transactional
+    @Query(value = "select * from book order by id limit 1", nativeQuery = true)
+    Map<String, Object> findRawRecord();
 }

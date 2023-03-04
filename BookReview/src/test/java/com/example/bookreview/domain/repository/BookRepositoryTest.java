@@ -50,6 +50,10 @@ class BookRepositoryTest {
     @Test
     void converterTest() {
         bookRepository.findAll().forEach(System.out::println);
+        Book book = bookRepository.findById(1L).get();
+        book.setStatus(new BookStatus(200));
+        bookRepository.save(book);
+        System.out.println(bookRepository.findRawRecord().values());
     }
 
 //    @Test

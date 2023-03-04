@@ -40,7 +40,7 @@ public class Book extends BaseEntity {
     @JoinColumn(name = "book_key", insertable = false, updatable = false)
     private List<BookReview> reviews = new ArrayList<>();
 
-    @Convert(converter = BookStatusConverter.class)
+//    @Convert(converter = BookStatusConverter.class)
     private BookStatus status;
 
     public void addAuthor(Author... author) {

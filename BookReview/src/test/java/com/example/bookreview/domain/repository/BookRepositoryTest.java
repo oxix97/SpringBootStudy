@@ -1,6 +1,7 @@
 package com.example.bookreview.domain.repository;
 
 import com.example.bookreview.domain.entity.Book;
+import com.example.bookreview.domain.repository.dto.BookStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ class BookRepositoryTest {
             Book book = new Book();
             book.setName("Test " + i);
             book.setCategory("Book");
+            book.setStatus(new BookStatus(100));
             bookRepository.save(book);
         }
     }
@@ -43,6 +45,11 @@ class BookRepositoryTest {
         System.out.println("--------------------------");
         System.out.println("count : " + bookRepository.updateNativeQuery("Need Native"));
         System.out.println("--------------------------");
+    }
+
+    @Test
+    void converterTest() {
+        bookRepository.findAll().forEach(System.out::println);
     }
 
 //    @Test

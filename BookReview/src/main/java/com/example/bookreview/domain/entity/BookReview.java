@@ -4,6 +4,10 @@ import com.example.bookreview.domain.listener.BookReviewListener;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
@@ -15,24 +19,24 @@ public class BookReview extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
-    @Column(name = "user_key")
-    private Long userId;
-
-    @NonNull
-    @Column(name = "book_key")
-    private Long bookId;
-
     private String title;
 
     private String content;
 
-    private float score;
+//    private float score;
+//
+//    private int count;
 
-    private int count;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     @ToString.Exclude
     private Book book;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "book_review_id")
+    private List<Comment> comments = new ArrayList<>();
+
+    public void addComment(Comment... comment) {
+        Collections.addAll(this.comments, comment);
+    }
 }

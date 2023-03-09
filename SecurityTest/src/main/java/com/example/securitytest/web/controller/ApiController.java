@@ -1,16 +1,18 @@
 package com.example.securitytest.web.controller;
 
+import com.example.securitytest.web.AnyController;
 import com.example.securitytest.web.dto.SecurityMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class ApiController {
+public class ApiController implements AnyController {
 
     @RequestMapping("/")
     public String index() {
@@ -24,16 +26,16 @@ public class ApiController {
         return context;
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('ROLE_USER')")
+    @Override
     @RequestMapping("/user")
     public SecurityMessage user() {
         return SecurityMessage.builder()
                 .auth(SecurityContextHolder.getContext().getAuthentication())
-                .msg("User info")
+                .msg("user info")
                 .build();
     }
 
-    @PreAuthorize(value = "hasAnyAuthority('ROLE_ADMIN')")
+    @Override
     @RequestMapping("/admin")
     public SecurityMessage admin() {
         return SecurityMessage.builder()
@@ -41,4 +43,22 @@ public class ApiController {
                 .msg("admin info")
                 .build();
     }
+
+//    @PreAuthorize(value = "hasAuthority('ROLE_USER')")
+//    @GetMapping("/user")
+//    public SecurityMessage user() {
+//        return SecurityMessage.builder()
+//                .auth(SecurityContextHolder.getContext().getAuthentication())
+//                .msg("User info")
+//                .build();
+//    }
+//
+//    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
+//    @RequestMapping("/admin")
+//    public SecurityMessage admin() {
+//        return SecurityMessage.builder()
+//                .auth(SecurityContextHolder.getContext().getAuthentication())
+//                .msg("admin info")
+//                .build();
+//    }
 }

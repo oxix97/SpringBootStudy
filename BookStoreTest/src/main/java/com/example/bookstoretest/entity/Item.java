@@ -15,7 +15,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DTYPE")
+public abstract class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,10 +25,10 @@ public class Item {
     private String name;
     private int price;
 
-    @OneToMany(mappedBy = "items")
-    private List<Category> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "category")
+    private List<CategoryItem> categories = new ArrayList<>();
 
-    public void addCategory(Category... categories) {
+    public void addCategory(CategoryItem... categories) {
         Collections.addAll(this.categories, categories);
     }
 }

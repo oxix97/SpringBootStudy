@@ -25,10 +25,10 @@ public abstract class Item {
     private String name;
     private int price;
 
-    @OneToMany(mappedBy = "category")
-    private List<CategoryItem> categories = new ArrayList<>();
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
 
-    public void addCategory(CategoryItem... categories) {
+    public void addCategory(Category... categories) {
         Collections.addAll(this.categories, categories);
     }
 }

@@ -17,7 +17,7 @@ class MemberServiceTest {
     private MemberService service;
 
     @Test
-    void joinTest() throws Exception {
+    void 회원가입_테스트() throws Exception {
         Member member = new Member();
         member.setName("KiM");
 
@@ -27,7 +27,15 @@ class MemberServiceTest {
     }
 
     @Test
-    void test1() {
+    void 중복가입_테스트() {
+        Member member1 = new Member();
+        member1.setName("Kim");
+        service.join(member1);
+
+        member1.setName("LEE");
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            service.join(member1);
+        });
 
     }
 

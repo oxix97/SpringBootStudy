@@ -4,6 +4,7 @@ import com.example.bookstoretest.entity.*;
 import com.example.bookstoretest.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,5 +50,17 @@ class OrderedRepositoryTest {
         Assertions.assertEquals(1, ordered.getOrderItems().size());
         Assertions.assertEquals(20_000, ordered.getTotalPrice());
         Assertions.assertEquals(3, item.getStockQuantity());
+    }
+
+    @Test
+    void 주문취소() {
+        Member member = createMember();
+        Item item = createBook("JPA", 10_000, 5);
+        int orderCount = 2;
+        Ordered ordered = service.order(member.getId(), item.getId(), orderCount);
+
+        service.cancelOrder(ordered.getId());
+        Assertions.assertEquals(OrderStatus.NONE, ordered.getOrderStatus());
+        Assertions.assertEquals(5, item.getStockQuantity());
     }
 }

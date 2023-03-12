@@ -39,6 +39,16 @@ public class ItemController {
         return stream.toList();
     }
 
+    @PutMapping("/update/{book-id}")
+    public ItemData updateBook(
+            @PathVariable(name = "book-id") Long id,
+            @RequestBody Book body
+    ) {
+        body.setId(id);
+        service.saveItem(body);
+        return entityToDto(body);
+    }
+
 
     private ItemData entityToDto(Book item) {
         return ItemData.builder()

@@ -1,10 +1,7 @@
 package com.example.bookstoretest.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
@@ -15,7 +12,8 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ordered {
+@EqualsAndHashCode(callSuper = true)
+public class Ordered extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

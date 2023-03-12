@@ -24,11 +24,20 @@ public abstract class Item {
 
     private String name;
     private int price;
+    private int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
     private List<Category> categories = new ArrayList<>();
 
     public void addCategory(Category... categories) {
         Collections.addAll(this.categories, categories);
+    }
+
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0) {
+            throw new IllegalStateException("need more stock");
+        }
+        this.stockQuantity = restStock;
     }
 }

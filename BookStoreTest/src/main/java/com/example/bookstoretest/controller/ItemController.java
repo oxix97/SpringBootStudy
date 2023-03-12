@@ -1,6 +1,7 @@
 package com.example.bookstoretest.controller;
 
 import com.example.bookstoretest.dto.ItemData;
+import com.example.bookstoretest.dto.ResponseData;
 import com.example.bookstoretest.entity.Book;
 import com.example.bookstoretest.entity.Item;
 import com.example.bookstoretest.service.ItemService;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +20,7 @@ public class ItemController {
     private ObjectMapper mapper;
 
     @GetMapping("/{name}")
-    public ItemData getBook(
+    public ResponseData<?> getBook(
             @PathVariable String name
     ) {
         Book item = (Book) service.findByName(name);
@@ -26,7 +28,7 @@ public class ItemController {
     }
 
     @PostMapping("/save")
-    public ItemData saveBook(
+    public ResponseData<?> saveBook(
             @RequestBody Book book
     ) {
         service.saveItem(book);
@@ -34,13 +36,17 @@ public class ItemController {
     }
 
     @GetMapping("/find-all")
-    public List<ItemData> getAllBooks() {
-        var stream = service.findAllItems().stream().map(item -> entityToDto((Book) item));
-        return stream.toList();
+    public ResponseData<?> getAllBooks() {
+        var data = service.findAllItems().stream().map(item -> ItemData.builder()
+                .name(item.getName())
+                .price(item.getPrice())
+                .stockQuantity(item.getStockQuantity())
+                .build()).toList();
+        return responseData(data);
     }
 
     @PutMapping("/update/{book-id}")
-    public ItemData updateBook(
+    public ResponseData<?> updateBook(
             @PathVariable(name = "book-id") Long id,
             @RequestBody Book body
     ) {
@@ -49,12 +55,21 @@ public class ItemController {
         return entityToDto(body);
     }
 
-
-    private ItemData entityToDto(Book item) {
-        return ItemData.builder()
+    private ResponseData<?> entityToDto(Book item) {
+        var data = ItemData.builder()
                 .name(item.getName())
                 .price(item.getPrice())
                 .stockQuantity(item.getStockQuantity())
+                .build();
+        return responseData(data);
+    }
+
+    private ResponseData<Object> responseData(Object data) {
+        return ResponseData.builder()
+                .status(200)
+                .success(true)
+                .message("정상 작동")
+                .data(data)
                 .build();
     }
 }

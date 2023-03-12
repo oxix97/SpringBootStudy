@@ -2,6 +2,7 @@ package com.example.bookstoretest.service;
 
 import com.example.bookstoretest.entity.Item;
 import com.example.bookstoretest.repository.ItemRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class ItemService {
 
     public Item findByItemId(Long id) {
         return repository.findById(id).orElseThrow();
+    }
+
+    public Item findByName(String name) {
+        return repository.findByName(name);
     }
 }

@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/item/book")
@@ -16,7 +18,7 @@ public class ItemController {
     private ObjectMapper mapper;
 
     @GetMapping("/{name}")
-    public ItemData getItem(
+    public ItemData getBook(
             @PathVariable String name
     ) {
         Book item = (Book) service.findByName(name);
@@ -24,11 +26,17 @@ public class ItemController {
     }
 
     @PostMapping("/save")
-    public ItemData saveItem(
+    public ItemData saveBook(
             @RequestBody Book book
     ) {
         service.saveItem(book);
         return entityToDto(book);
+    }
+
+    @GetMapping("/find-all")
+    public List<ItemData> getAllBooks() {
+        var stream = service.findAllItems().stream().map(item -> entityToDto((Book) item));
+        return stream.toList();
     }
 
 

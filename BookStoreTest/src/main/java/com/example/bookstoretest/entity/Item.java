@@ -33,6 +33,10 @@ public abstract class Item {
         Collections.addAll(this.categories, categories);
     }
 
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
     public void removeStock(int quantity) {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) {

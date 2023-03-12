@@ -22,13 +22,13 @@ public class Member {
     private String name;
 
     @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
+    private List<Ordered> ordereds = new ArrayList<>();
 
     @Embedded
     private Address address;
 
-    public void addOrder(Order... orders) {
-        Collections.addAll(this.orders, orders);
+    public void addOrder(Ordered... ordereds) {
+        Collections.addAll(this.ordereds, ordereds);
     }
 
 }

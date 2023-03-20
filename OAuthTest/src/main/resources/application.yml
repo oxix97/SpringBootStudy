@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    include: oauth
+  security:
+    oauth2:
+      resource-server:
+        opaque-token:
+          client-id:
+          client-secret:

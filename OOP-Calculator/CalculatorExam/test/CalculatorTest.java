@@ -1,3 +1,4 @@
+import oop.OOPCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,11 +9,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 public class CalculatorTest {
-    @DisplayName("덧셈 연산")
+    @DisplayName("연산")
     @MethodSource("formulaAndResult")
     @ParameterizedTest
     void addTest(int operand1, String operator, int operand2, int result) {
-        int calculateResult = Calculator.calculate(operand1, operand2, operator);
+        int calculateResult = OOPCalculator.calculate(operand1, operand2, operator);
         Assertions.assertEquals(calculateResult, result);
     }
 

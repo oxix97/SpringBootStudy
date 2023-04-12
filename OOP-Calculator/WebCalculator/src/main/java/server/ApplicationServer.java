@@ -8,10 +8,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ApplicationServer {
     private final int port;
     private static final Logger logger = LoggerFactory.getLogger(ApplicationServer.class);
+    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     public ApplicationServer(int port) {
         this.port = port;
@@ -26,7 +29,8 @@ public class ApplicationServer {
 
             while ((clientSocket = serverSocket.accept()) != null) {
                 logger.info("ApplicationServer client connected!!");
-                new Thread(new ClientRequestHandler(clientSocket)).start();
+                executorService.execute(new ClientRequestHandler(clientSocket));
+//                new Thread(new ClientRequestHandler(clientSocket)).start();
             }
         }
     }

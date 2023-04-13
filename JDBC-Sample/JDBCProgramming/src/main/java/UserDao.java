@@ -1,61 +1,53 @@
-import java.sql.*;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDao {
+
     public void create(User user) throws SQLException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "INSERT INTO USERS VALUES(?, ?, ?, ?)";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, user.getUserId());
-            pstmt.setString(2, user.getPassword());
-            pstmt.setString(3, user.getName());
-            pstmt.setString(4, user.getEmail());
-
-            pstmt.executeUpdate();
-        } finally {
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
+        template.executeUpdate(sql, setter -> {
+            setter.setString(1, user.getUserId());
+            setter.setString(2, user.getPassword());
+            setter.setString(3, user.getName());
+            setter.setString(4, user.getEmail());
+        });
+        System.out.println(template);
     }
 
-    public User findByUserId(String userId) throws SQLException {
-        Connection con = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
+    public User findById(String userId) throws SQLException {
+        JdbcTemplate template = new JdbcTemplate();
+        String sql = "SELECT userId, password, name, email FROM USERS WHERE userId = ?";
 
-        try {
-            con = ConnectionManager.getConnection();
-            String sql = "SELECT userId, password, name, email FROM USERS WHERE userId = ?";
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, userId);
-            rs = pstmt.executeQuery();
-            User user = null;
-            if (rs.next()) {
-                user = new User(
-                        rs.getString("userId"),
-                        rs.getString("password"),
-                        rs.getString("name"),
-                        rs.getString("email")
+        System.out.println("------------");
+        RowMapper tMapper = new RowMapper() {
+            @Override
+            public Object map(ResultSet set) throws SQLException {
+                return new User(
+                        set.getString("userId"),
+                        set.getString("password"),
+                        set.getString("name"),
+                        set.getString("email")
                 );
             }
-            return user;
-        } finally {
-            if (rs != null) {
-                rs.close();
+        };
+        System.out.println("-----------");
+
+        return (User) template.executeQuery(sql, setter -> {
+            setter.setString(1, userId);
+        }, new RowMapper() {
+            @Override
+            public Object map(ResultSet set) throws SQLException {
+                return new User(
+                        set.getString("userId"),
+                        set.getString("password"),
+                        set.getString("name"),
+                        set.getString("email")
+                );
             }
-            if (pstmt != null) {
-                pstmt.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
+        });
     }
 }

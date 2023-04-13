@@ -13,16 +13,16 @@ public class UserDaoTest {
     void setUp() {
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         populator.addScript(new ClassPathResource(("db_schema.sql")));
-        DatabasePopulatorUtils.execute(populator,ConnectionManager.getDataSource());
+        DatabasePopulatorUtils.execute(populator, ConnectionManager.getDataSource());
     }
 
     @Test
     void createdTest() throws SQLException {
         UserDao dao = new UserDao();
-        dao.create(new User("hazard","pw","name","email"));
+        dao.create(new User("hazard", "pw", "name", "email"));
+        User user = dao.findById("hazard");
 
-        User user = dao.findByUserId("hazard");
-        Assertions.assertEquals(user,new User("hazard","pw","name","email"));
+        Assertions.assertEquals(user, new User("hazard", "pw", "name", "email"));
 
     }
 }

@@ -1,6 +1,7 @@
 import example.annotation.Controller;
 import example.annotation.Service;
 import example.model.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
@@ -42,5 +43,26 @@ public class ReflectionTest {
         log.info("User all declared fields : [{}]", Arrays.stream(clazz.getDeclaredFields()).collect(Collectors.toList()));
         log.info("User all declared constructor : [{}]", Arrays.stream(clazz.getDeclaredConstructors()).collect(Collectors.toList()));
         log.info("User all declared method : [{}]", Arrays.stream(clazz.getDeclaredMethods()).collect(Collectors.toList()));
+    }
+
+    @Test
+    void loadTest() throws ClassNotFoundException {
+        //1
+        Class<User> clazz = User.class;
+
+        //2
+        User user = new User("Chan", "Khan");
+        Class<? extends User> clazz2 = user.getClass();
+
+        //3
+        Class<?> clazz3 = Class.forName("example.model.User");
+        log.info("clazz : [{}]", clazz);
+        log.info("clazz : [{}]", clazz2);
+        log.info("clazz : [{}]", clazz3);
+
+        Assertions.assertEquals(clazz, clazz2);
+        Assertions.assertEquals(clazz, clazz3);
+        Assertions.assertEquals(clazz2, clazz3);
+
     }
 }

@@ -11,11 +11,16 @@ repositories {
 
 dependencies {
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
-    implementation 'ch.qos.logback:logback-classic:1.4.6'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.7'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.7'
+    implementation 'jstl:jstl:1.2'
+    implementation 'org.apache.tomcat:tomcat-catalina:10.1.7'
+    implementation 'org.apache.tomcat:tomcat-jasper:10.1.7'
+    implementation 'org.apache.tomcat:tomcat:10.1.7'
+
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'ch.qos.logback:logback-classic:1.4.6'
 }
 
 test {

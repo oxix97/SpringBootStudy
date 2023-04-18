@@ -7,11 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
-public class Main {
-    private static final Logger log = LoggerFactory.getLogger(Main.class);
+public class WebApplicationServer {
+    private static final Logger log = LoggerFactory.getLogger(WebApplicationServer.class);
 
     public static void main(String[] args) throws LifecycleException {
-        String location = "webapps/";
+        String location = "tomcat.8080";
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(8080);
 

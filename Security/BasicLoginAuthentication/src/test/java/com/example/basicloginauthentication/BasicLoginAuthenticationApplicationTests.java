@@ -1,15 +1,13 @@
-package com.example.securitytest;
+package com.example.basicloginauthentication;
 
-import com.example.securitytest.web.controller.ApiController;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SecurityTestApplicationTests {
+class BasicLoginAuthenticationApplicationTests {
 
     @Test
     void contextLoads() {
-
     }
 
 }

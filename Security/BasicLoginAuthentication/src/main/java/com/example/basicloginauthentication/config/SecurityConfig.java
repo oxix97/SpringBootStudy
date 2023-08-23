@@ -1,6 +1,5 @@
 package com.example.basicloginauthentication.config;
 
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,7 +22,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/"
-                        ).authenticated()
+                        ).permitAll()
                         .requestMatchers(
                                 HttpMethod.GET,
                                 "/admin"

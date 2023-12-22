@@ -10,17 +10,18 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class JobConfig {
+public class HelloJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean("helloJob")
-    public Job helloJob(Step step) {
+    public Job helloJob(@Qualifier("helloStep") Step step) {
         return jobBuilderFactory.get("helloJob")
                 .incrementer(new RunIdIncrementer())
                 .start(step)

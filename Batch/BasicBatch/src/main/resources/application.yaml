@@ -3,7 +3,7 @@ spring:
     active: local
   batch:
     job:
-      names: ${job.name:NONE}
+      names: ${job.name:plainTextJob}
 
 ---
 spring:
@@ -20,6 +20,12 @@ spring:
     generate-ddl: false
     hibernate:
       ddl-auto: none
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+  sql:
+    init:
+      mode: always
   batch:
     jdbc:
       initialize-schema: always

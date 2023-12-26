@@ -1,1 +1,42 @@
+spring:
+  profiles:
+    active: local
+  batch:
+    job:
+      names: ${job.name:job1}
 
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/test22
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.format_sql: true
+      hibernate.default_batch_fetch_size: 100
+  sql:
+    init:
+      mode: always
+  batch:
+    jdbc:
+      initialize-schema: always
+#external:
+#  apartment-api:
+#    path: http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade
+#    service-key: Z8PsmY935x%2BLNyUMHzlts1gfW8Q%2B7JUOceZnuTAT1nYJrxFwpQNyPhBgZ0sQhf6WP5JaKg3tIFQKtFjqTHHn3Q%3D%3D
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  jpa:
+    database: h2

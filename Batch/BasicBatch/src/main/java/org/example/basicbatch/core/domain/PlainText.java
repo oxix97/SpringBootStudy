@@ -1,4 +1,4 @@
-package org.example.core.domain;
+package org.example.basicbatch.core.domain;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;

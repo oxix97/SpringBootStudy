@@ -1,10 +1,10 @@
-package org.example.job;
+package org.example.basicbatch.job;
 
 import lombok.RequiredArgsConstructor;
-import org.example.core.domain.PlainText;
-import org.example.core.domain.ResultText;
-import org.example.core.repository.PlainTextRepository;
-import org.example.core.repository.ResultTextRepository;
+import org.example.basicbatch.core.domain.PlainText;
+import org.example.basicbatch.core.domain.ResultText;
+import org.example.basicbatch.core.repository.PlainTextRepository;
+import org.example.basicbatch.core.repository.ResultTextRepository;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
